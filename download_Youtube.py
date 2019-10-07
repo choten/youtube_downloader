@@ -1,5 +1,6 @@
 import sys
 from pytube import YouTube
+import re
 
 def DownLoadVideo():
     yt = YouTube(url)
@@ -15,7 +16,16 @@ def show_progress_bar(stream, chunk, file_handle, bytes_remaining):
         sys.stdout.write("\r下載進度: %d%%" % percent)
         sys.stdout.flush()
 
+def is_url_valid(url):
+    pattern = re.compile(r"^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$")
+    result = pattern.search(url)
+    return False if result == None else True
+    
 url = input("請輸入youtube影片網址:\n")
+
+while is_url_valid(url) == False:
+    print("youtube影片網址有誤!")
+    url = input("請重新輸入youtube影片網址:\n")
 
 try:
     DownLoadVideo()
