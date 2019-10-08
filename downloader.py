@@ -2,7 +2,7 @@ import sys
 from pytube import YouTube
 import re
 
-def downLoadVideo():
+def download_single_video():
     yt = YouTube(url)
     yt.register_on_progress_callback(show_progress_bar)
     yt.register_on_complete_callback(convert_to_aac)
@@ -28,7 +28,7 @@ while is_url_valid(url) == False:
     url = input("請重新輸入youtube影片網址:\n")
 
 try:
-    downLoadVideo()
+    download_single_video()
     
 except Exception as e:
     print('發生錯誤，無法下載影片。')
